@@ -1,0 +1,12 @@
+{
+  "name": "dsh-tryboard-plugin",
+  "description": "Trello-style kanban boards inside the DSH web GUI: a 看板 entry in the sidebar (above Settings), multiple named workboards, default status columns (待办/进行中/完成/待确认), drag & drop cards, custom columns — data persisted in DSH settings",
+  "version": "0.1.0",
+  "entry": {
+    "name": "dsh-tryboard-plugin",
+    "inject": []
+  },
+  "client": {
+    "platform": "web"
+  }
+}
