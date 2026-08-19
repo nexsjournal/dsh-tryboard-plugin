@@ -196,7 +196,8 @@ console.log("\n# client half (lib/client.js)");
   const closedWide = render(sidebarReg.Comp, { wide: true, t, onOpen: () => {} });
   const closedRail = render(sidebarReg.Comp, { wide: false, t, onOpen: () => {} });
   check("sidebar entry renders label when wide", closedWide.includes("dsh-tb-sb-label") && closedWide.includes("看板"), closedWide.slice(0, 120));
-  check("sidebar entry renders icon-only in rail", closedRail.includes("stub-icon") && !closedRail.includes("dsh-tb-sb-label"), closedRail.slice(0, 120));
+  check("sidebar entry uses brand board icon", closedWide.includes('viewBox="2 2 28 28"') && closedRail.includes('viewBox="2 2 28 28"'));
+  check("sidebar entry renders icon-only in rail", closedRail.includes('viewBox="2 2 28 28"') && !closedRail.includes("dsh-tb-sb-label"), closedRail.slice(0, 120));
 
   // ---- render: page closed ----
   const pageClosed = render(overlayReg.Comp, { close: () => {}, t });
@@ -296,6 +297,7 @@ console.log("\n# static: sidebar footer entries stack vertically (shell v2.0.1+ 
   const { readFileSync } = await import("node:fs");
   const src = readFileSync(new URL("../lib/client.js", import.meta.url), "utf8");
   check("column-fix selector present (structural, hash-free)", src.includes('body :has(> [data-slot="sidebar.footer.action"])') && src.includes("flex-direction:column !important"));
+  check("settings gear mask override present (scoped to sidebar slot)", src.includes('[data-slot="sidebar.settings"] > button > svg{display:none !important}') && src.includes('mask:url("data:image/svg+xml;utf8,') && src.includes(':has(> span)::before'));
 }
 
 console.log(failures === 0 ? "\n# smoke: ALL PASS" : `\n# smoke: ${failures} FAILURE(S)`);
