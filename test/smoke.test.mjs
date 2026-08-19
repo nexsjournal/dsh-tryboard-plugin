@@ -297,7 +297,7 @@ console.log("\n# static: sidebar footer entries stack vertically (shell v2.0.1+ 
   const { readFileSync } = await import("node:fs");
   const src = readFileSync(new URL("../lib/client.js", import.meta.url), "utf8");
   check("column-fix selector present (structural, hash-free)", src.includes('body :has(> [data-slot="sidebar.footer.action"])') && src.includes("flex-direction:column !important"));
-  check("settings gear mask override present (scoped to sidebar slot)", src.includes('[data-slot="sidebar.settings"] > button > svg{display:none !important}') && src.includes('mask:url("data:image/svg+xml;utf8,') && src.includes(':has(> span)::before'));
+  check("settings gear mask override present (scoped to sidebar slot)", src.includes('[data-slot="sidebar.settings"] button [data-slot="settings.trigger"] > svg{display:none !important}') && src.includes('mask:url("data:image/svg+xml;utf8,') && src.includes(':has([data-slot="settings.trigger"] > span)::before'));
 }
 
 console.log(failures === 0 ? "\n# smoke: ALL PASS" : `\n# smoke: ${failures} FAILURE(S)`);
