@@ -290,5 +290,13 @@ console.log("\n# static: no hook after a top-level return (rules of hooks)");
   }
 }
 
+// ============ static regression: sidebar footer row-vs-column fix =============
+console.log("\n# static: sidebar footer entries stack vertically (shell v2.0.1+ row layout)");
+{
+  const { readFileSync } = await import("node:fs");
+  const src = readFileSync(new URL("../lib/client.js", import.meta.url), "utf8");
+  check("column-fix selector present (structural, hash-free)", src.includes('body :has(> [data-slot="sidebar.footer.action"])') && src.includes("flex-direction:column !important"));
+}
+
 console.log(failures === 0 ? "\n# smoke: ALL PASS" : `\n# smoke: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
